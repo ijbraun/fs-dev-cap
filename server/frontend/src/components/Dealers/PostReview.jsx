@@ -47,7 +47,7 @@ const PostReview = () => {
       "car_year": year,
     });
 
-    console.log(jsoninput);
+    // console.log(jsoninput);
     const res = await fetch(review_url, {
       method: "POST",
       headers: {
@@ -57,6 +57,7 @@ const PostReview = () => {
   });
 
   const json = await res.json();
+  console.log(json);
   if (json.status === 200) {
       window.location.href = window.location.origin+"/dealer/"+id;
   }
