@@ -79,8 +79,11 @@ def initiate():
        "type": "SUV",
        "year": 2023,
        "make": car_make_instances[4]},
-        # Add more CarModel instances as needed
     ]
 
     for data in car_model_data:
-        CarModel.objects.create(name=data['name'], make=data['make'], type=data['type'], year=data['year'])
+        CarModel.objects.create(
+            name=data['name'],
+            make=data['make'],
+            type=data['type'],
+            year=data['year'])
