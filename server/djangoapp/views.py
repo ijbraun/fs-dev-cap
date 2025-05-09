@@ -69,7 +69,7 @@ def registration(request):
         login(request, user)
         data = {"userName": username, "status": "Authenticated"}
         return JsonResponse(data)
-    else :
+    else:
         data = {"userName": username, "error": "Already Registered"}
         return JsonResponse(data)
 
@@ -77,7 +77,7 @@ def registration(request):
 def get_cars(request):
     count = CarMake.objects.filter().count()
     print(count)
-    if(count == 0):
+    if (count == 0):
         initiate()
     car_models = CarModel.objects.select_related('make')
     cars = []
@@ -88,7 +88,7 @@ def get_cars(request):
 
 
 def get_dealerships(request, state="All"):
-    if(state == "All"):
+    if (state == "All"):
         endpoint = "/fetchDealers"
     else:
         endpoint = "/fetchDealers/" + state
@@ -97,7 +97,7 @@ def get_dealerships(request, state="All"):
 
 
 def get_dealer_reviews(request, dealer_id):
-    if(dealer_id):
+    if (dealer_id):
         dealer_reviews = get_request("/fetchReviews/dealer/" + str(dealer_id))
 
         for review_detail in dealer_reviews:
@@ -111,7 +111,7 @@ def get_dealer_reviews(request, dealer_id):
 
 
 def get_dealer_details(request, dealer_id):
-    if(dealer_id):
+    if (dealer_id):
         dealer = get_request("/fetchDealer/" + str(dealer_id))
         return JsonResponse({"status": 200, "dealer": dealer})
     else:
@@ -119,10 +119,11 @@ def get_dealer_details(request, dealer_id):
 
 
 def add_review(request):
-    if(request.user.is_anonymous == False):
+    if (request.user.is_anonymous is False):
         data = json.loads(request.body)
         try:
             response = post_review(data)
+            print(response)
             return JsonResponse({"status": 200})
         except Exception:
             return JsonResponse({"status": 401,
