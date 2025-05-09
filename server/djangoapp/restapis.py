@@ -14,7 +14,7 @@ sentiment_analyzer_url = os.getenv(
 
 def get_request(endpoint, **kwargs):
     params = ""
-    if(kwargs):
+    if (kwargs):
         for key, value in kwargs.items():
             params = params + key + "=" + value + "&"
 
@@ -44,7 +44,7 @@ def analyze_review_sentiments(text):
 def post_review(data_dict):
     request_url = backend_url+"/insert_review"
     try:
-        response = requests.post(request_url, json = data_dict)
+        response = requests.post(request_url, json=data_dict)
         print(response.json())
         return response.json()
     except Exception:
