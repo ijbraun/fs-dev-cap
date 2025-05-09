@@ -37,6 +37,7 @@ def logout_request(request):
     data = {"username": ""}
     return JsonResponse(data)
 
+
 @csrf_exempt
 def registration(request):
 
@@ -66,11 +67,12 @@ def registration(request):
                                         email=email)
         # Login the user and redirect to list page
         login(request, user)
-        data = {"userName": username,"status": "Authenticated"}
+        data = {"userName": username, "status": "Authenticated"}
         return JsonResponse(data)
     else :
-        data = {"userName": username,"error": "Already Registered"}
+        data = {"userName": username, "error": "Already Registered"}
         return JsonResponse(data)
+
 
 def get_cars(request):
     count = CarMake.objects.filter().count()
@@ -84,13 +86,15 @@ def get_cars(request):
                      "CarMake": car_model.make.name})
     return JsonResponse({"CarModels": cars})
 
+
 def get_dealerships(request, state="All"):
     if(state == "All"):
         endpoint = "/fetchDealers"
     else:
         endpoint = "/fetchDealers/" + state
     dealerships = get_request(endpoint)
-    return JsonResponse({"status":200,"dealers":dealerships})
+    return JsonResponse({"status": 200, "dealers": dealerships})
+
 
 def get_dealer_reviews(request, dealer_id):
     if(dealer_id):
